@@ -1,0 +1,27 @@
+## =========================
+## Visual Studio
+## =========================
+.vs/
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Visual Studio Code
+.vscode/
+
+## =========================
+## .NET / MSBuild
+## =========================
+*.dll
+*.exe
+*.pdb
+*.cache
+
+## =========================
+## Environment / Secrets
+## =========================
+.env
+.env.*
+secrets.json
