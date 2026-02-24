@@ -1,0 +1,44 @@
+[
+  {
+    "ContainingType": "FarmController",
+    "Method": "ListarMinhasFazendas",
+    "RelativePath": "api/Farm",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmController",
+    "Method": "CriarPropriedade",
+    "RelativePath": "api/Farm/propriedade",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AgroSolutions_FarmService.DTO.PropriedadeCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FarmController",
+    "Method": "AdicionarTalhao",
+    "RelativePath": "api/Farm/talhao",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "AgroSolutions_FarmService.DTO.TalhaoCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
