@@ -2,29 +2,26 @@
 # Estágio 1: Build
 # ----------------------------
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+# Criando uma pasta interna no Docker para o build
+WORKDIR /home/app 
 
-# 1. Copia o arquivo de projeto e restaura as dependências
-# Usamos o wildcard para pegar o .csproj independente do nome exato
-COPY *.csproj ./
-RUN dotnet restore
+# 1. Copia o arquivo de projeto
+COPY ["AgroSolutions-FarmService.csproj", "./"]
+RUN dotnet restore "AgroSolutions-FarmService.csproj"
 
-# 2. Copia todo o restante do código fonte
-COPY . ./
+# 2. Copia todo o restante dos arquivos para o Docker
+COPY . .
 
-# 3. Publica a aplicação em modo Release
-RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
+# 3. Publica a aplicação
+RUN dotnet publish "AgroSolutions-FarmService.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 # ----------------------------
 # Estágio 2: Runtime
 # ----------------------------
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
-
-# Copia os arquivos publicados do estágio de build
 COPY --from=build /app/publish .
 
-# No .NET 8 a porta padrão é 8080
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
 
