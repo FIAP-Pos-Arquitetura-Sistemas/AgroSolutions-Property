@@ -1,23 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dev Hackthon\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj": {}
+    "C:\\FIAP\\FIAP-Agro-Solutions\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj": {}
   },
   "projects": {
-    "D:\\Dev Hackthon\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj": {
+    "C:\\FIAP\\FIAP-Agro-Solutions\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dev Hackthon\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj",
+        "projectUniqueName": "C:\\FIAP\\FIAP-Agro-Solutions\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj",
         "projectName": "AgroSolutions-FarmService",
-        "projectPath": "D:\\Dev Hackthon\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj",
-        "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "D:\\Dev Hackthon\\AgroSolutions-Property\\AgroSolutions-FarmService\\obj\\",
+        "projectPath": "C:\\FIAP\\FIAP-Agro-Solutions\\AgroSolutions-Property\\AgroSolutions-FarmService\\AgroSolutions-FarmService.csproj",
+        "packagesPath": "C:\\Users\\Vinícius\\.nuget\\packages\\",
+        "outputPath": "C:\\FIAP\\FIAP-Agro-Solutions\\AgroSolutions-Property\\AgroSolutions-FarmService\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Vinícius\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 21.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -25,8 +27,9 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\System\\Components\\Packages": {},
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://www.nuget.org/api/v2/": {}
         },
         "frameworks": {
           "net8.0": {
@@ -44,7 +47,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -67,6 +70,10 @@
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[8.0.24, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.22.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -92,7 +99,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
