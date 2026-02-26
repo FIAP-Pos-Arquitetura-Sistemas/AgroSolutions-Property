@@ -9,7 +9,10 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-
+    defaults:
+      run:
+        working-directory: ./AgroSolutions-FarmService
+        
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
