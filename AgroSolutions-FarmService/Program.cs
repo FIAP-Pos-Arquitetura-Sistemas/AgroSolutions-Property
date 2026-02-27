@@ -80,8 +80,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     try
     {
-        var context = services.GetRequiredService<IdentityService.Data.AppDbContext>();
-        // Isso aplica as migrations pendentes de forma assíncrona/síncrona no banco do Azure
+        var context = services.GetRequiredService<FarmDbContext>();
         context.Database.Migrate(); 
         Console.WriteLine("Migrations aplicadas com sucesso!");
     }
