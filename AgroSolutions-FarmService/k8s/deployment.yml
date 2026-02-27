@@ -2,10 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: farm-deployment
-  labels:
-    app: farm
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: farm
@@ -16,23 +14,29 @@ spec:
     spec:
       containers:
       - name: farm-api
-        image: viniciusdelr/agrosolutions-farm:v1 # Certifique-se de usar a tag correta
+        image: viniciusdelr/agrosolutions-farm:v1 
         ports:
         - containerPort: 8080
         env:
-        # Mesma conexão, pois o banco é unificado para o MVP [cite: 49]
         - name: ConnectionStrings__DefaultConnection
           valueFrom:
             secretKeyRef:
               name: agro-db-secret
               key: connection-string
-        # Necessário para validar o token gerado pelo IdentityService [cite: 11]
         - name: Jwt__Key
           valueFrom:
             secretKeyRef:
               name: agro-db-secret
               key: jwt-key
-        - name: Jwt__Issuer
-          value: "AgroSolutionsUsers"
-        - name: Jwt__Audience
-          value: "AgroSolutionsApps"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: farm-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: farm
