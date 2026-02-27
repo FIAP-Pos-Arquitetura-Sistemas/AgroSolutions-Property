@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: farm-service # Ou farm-service no outro repositório
+spec:
+  type: LoadBalancer # Crucial para gerar um IP público no Azure AKS [cite: 31, 55]
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: farm # Altere para 'app: farm' no repositório de propriedades
