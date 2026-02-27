@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: farm-api
-        image: viniciusdelr/agrosolutions-farm:v1 
+        image: viniciusdelr/agrosolutions-farmservice:v1 
         ports:
         - containerPort: 8080
         env:
