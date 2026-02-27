@@ -8,24 +8,20 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configurações de JWT
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "SuaChaveSuperSecretaAgroSolutions2026!";
 var key = Encoding.ASCII.GetBytes(jwtKey);
 
-// 2. Banco de Dados
 var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING")
                        ?? builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<FarmDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-// 3. REGISTRO DO SWAGGER (O que estava faltando e causou o erro)
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "AgroSolutions Farm API", Version = "v1" });
 
-    // Configuração para permitir colar o Token JWT no Swagger
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -33,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Digite 'Bearer' [espaço] e o seu token.\n Exemplo: Bearer eyJhbG..."
+        Description = "Digite 'Bearer' [espaÃ§oo] e o seu token.\n Exemplo: Bearer eyJhbG..."
     });
 
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -48,10 +44,8 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// 4. Registro do seu Service de Negócio
 builder.Services.AddScoped<IFarmService, FarmService>();
 
-// 5. Autenticação e Autorização
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -60,7 +54,7 @@ builder.Services.AddAuthentication(x =>
 
 .AddJwtBearer(x =>
 {
-    x.IncludeErrorDetails = true; // Isso ajudará a ver o erro real no log do console
+    x.IncludeErrorDetails = true; 
     x.RequireHttpsMetadata = false;
     x.SaveToken = true;
     x.TokenValidationParameters = new TokenValidationParameters
@@ -72,7 +66,7 @@ builder.Services.AddAuthentication(x =>
         ValidateAudience = true,
         ValidAudience = "AgroSolutionsApps",
         ValidateLifetime = true,
-        ClockSkew = TimeSpan.Zero // Remove a tolerância de 5 min do .NET para testes precisos
+        ClockSkew = TimeSpan.Zero 
     };
 });
 
@@ -81,11 +75,25 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
-// Pipeline de Execução
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<IdentityService.Data.AppDbContext>();
+        // Isso aplica as migrations pendentes de forma assÃ­ncrona/sÃ­ncrona no banco do Azure
+        context.Database.Migrate(); 
+        Console.WriteLine("Migrations aplicadas com sucesso!");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Erro ao aplicar migrations: {ex.Message}");
+    }
+}
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-// O Swagger agora encontrará os serviços registrados acima
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
