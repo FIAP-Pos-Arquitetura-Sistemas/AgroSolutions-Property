@@ -43,7 +43,7 @@ jobs:
         with:
           manifests: |
             k8s/deployment.yml
-            k8s/service.yml
+            k8s/Service.yml
           images: |
             viniciusdelr/agrosolutions-farmservice:v1
 
