@@ -78,15 +78,29 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    try
+    var context = services.GetRequiredService<FarmDbContext>();
+    var logger = services.GetRequiredService<ILogger<Program>>();
+
+    // Tenta até 3 vezes com um intervalo de 10 segundos entre elas
+    int retryCount = 0;
+    bool success = false;
+
+    while (!success && retryCount < 3)
     {
-        var context = services.GetRequiredService<FarmDbContext>();
-        context.Database.Migrate(); 
-        Console.WriteLine("Migrations aplicadas com sucesso!");
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Erro ao aplicar migrations: {ex.Message}");
+        try
+        {
+            logger.LogInformation("Tentando aplicar migrations (Tentativa {0})...", retryCount + 1);
+            context.Database.Migrate();
+            logger.LogInformation("Migrations aplicadas ou banco já atualizado!");
+            success = true;
+        }
+        catch (Exception ex)
+        {
+            retryCount++;
+            logger.LogWarning("Banco de dados ainda indisponível. Aguardando 10s para tentar novamente...");
+            if (retryCount >= 3) logger.LogError(ex, "Falha definitiva ao conectar no banco.");
+            Thread.Sleep(10000); // Aguarda 10 segundos para o banco Serverless subir
+        }
     }
 }
 
