@@ -58,7 +58,7 @@ Este serviço segue os princípios de:
 
 - bash
   
-git clone https://github.com/viniciusdelr/AgroSolutions-FarmService.git
+git clone https://github.com/FIAP-Pos-Arquitetura-Sistemas/AgroSolutions-Property
 cd AgroSolutions-FarmService
 
 ### Executando com Docker
